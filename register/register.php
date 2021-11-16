@@ -21,7 +21,7 @@
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     }
     //Mysqli Setup//
-    $mysqli = new mysqli("localhost", "USERNAME", "PASSWORD", "DATABASE");
+    include("../mysql.php");
     //Check Setup for User//
     $check = $mysqli->prepare("SELECT * FROM `dj_accounts` WHERE `username` = ?");
     $check->bind_param("s", $username);
