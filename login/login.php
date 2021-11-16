@@ -6,7 +6,7 @@
     $password = $_POST['password'];
     //Mysqli Setup//
     $mysqli = new mysqli("localhost", "USER", "PASSWORD", "DATABASE");
-    $stmt = $mysqli->prepare("SELECT * FROM `accounts` WHERE `username` = ?");
+    $stmt = $mysqli->prepare("SELECT * FROM `dj_accounts` WHERE `username` = ?");
     $stmt->bind_param("s", $username);
     //Execute//
     if ($stmt->execute()) {
