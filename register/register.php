@@ -6,6 +6,11 @@
     $ip = $_SERVER['REMOTE_ADDR'];
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    //Username Length Check//
+    if (strlen($username) > 32) {
+        $_SESSION['error'] = "Username Over 32 Chars.";
+        header("Location: ./");
+    }
     //Mysqli Setup//
     $mysqli = new mysqli("localhost", "USER", "PASSWORD", "DATABASE");
     //Check Setup for User//
