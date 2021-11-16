@@ -4,15 +4,24 @@
     //Values//
     $id = rand(0,999999);
     $ip = $_SERVER['REMOTE_ADDR'];
-    $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    //Username Length Check//
-    if (strlen($username) > 32) {
+    //Check//
+    if (mb_strlen($_POST['username'], "utf8") > 32) {
         $_SESSION['error'] = "Username Over 32 Chars.";
         header("Location: ./");
+    } else if(!mb_strlen(trim($_POST['username']), "utf8") > 0){
+        $_SESSION['error'] = "Username Empty";
+        header("Location: ./");
+    } else {
+        $username = $_POST['username'];
+    }
+    if(!mb_strlen(trim($_POST['password']), "utf8") > 0){
+        $_SESSION['error'] = "Password Empty";
+        header("Location: ./");
+    } else {
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     }
     //Mysqli Setup//
-    $mysqli = new mysqli("localhost", "USER", "PASSWORD", "DATABASE");
+    $mysqli = new mysqli("localhost", "USERNAME", "PASSWORD", "DATABASE");
     //Check Setup for User//
     $check = $mysqli->prepare("SELECT * FROM `dj_accounts` WHERE `username` = ?");
     $check->bind_param("s", $username);
