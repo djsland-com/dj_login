@@ -5,7 +5,7 @@
     $username = $_POST['username'];
     $password = $_POST['password'];
     //Mysqli Setup//
-    $mysqli = new mysqli("localhost", "USER", "PASSWORD", "DATABASE");
+    include("../mysql.php");
     $stmt = $mysqli->prepare("SELECT * FROM `dj_accounts` WHERE `username` = ?");
     $stmt->bind_param("s", $username);
     //Execute//
